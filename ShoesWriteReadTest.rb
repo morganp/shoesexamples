@@ -28,13 +28,14 @@ require 'yaml'
 class CanonicalConversion < Shoes
    url '/',      :index
 
-   $configFile = ".amaras/RWTestConfig.yml"
+   Dir.chdir(File.dirname($PROGRAM_NAME))
+   $configFile = File.dirname($PROGRAM_NAME) + "/.amaras/RWTestConfig.yml"
    $numbers = {} 
     
     
    #Function to save
    def saveConfig(configFile, config)
-      FileUtils.mkdir_p '.amaras'
+      FileUtils.mkdir_p "#{File.dirname($PROGRAM_NAME)}/.amaras"
       open(configFile, 'w') {|f| YAML.dump(config, f)}
    end
     
